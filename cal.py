@@ -52,7 +52,7 @@ def update_display(value):
 
 
 root = tk.Tk()
-root.geometry("350x375")
+root.geometry("425x375")
 root.title("Calculator")
 root.configure(bg="#1B2631")
 
