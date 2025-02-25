@@ -1,10 +1,31 @@
 import tkinter as tk
+import math
 
 calculation = ""
 def add_to_calculation(symbol):
     global calculation
     calculation += str(symbol)
     update_display(calculation)
+    
+def apply_trigonometry(trig_function):
+    global calculation
+    
+    try:
+        val = float(calculation)
+        rad = math.radians(val)
+        if trig_function == "sin":
+            result = math.sin(rad)
+        elif trig_function == "cos":
+            result = math.cos(rad)
+        elif trig_function == "tan":
+            result = math.tan(rad)
+        
+        calculation = str(result)
+        update_display(result)
+
+    except:
+        clear_filed()
+        update_display("Error")
 
 def evaluation_calculation():
     global calculation 
@@ -76,7 +97,7 @@ btn_8.grid(row =4, column=2 , padx=5, pady=5)
 btn_9 = tk.Button(root, text ="9", command=lambda: add_to_calculation(9),  **number_style)
 btn_9.grid(row =4, column=3 , padx=5, pady=5)
 btn_0 = tk.Button(root, text ="0", command=lambda: add_to_calculation(0),  **number_style)
-btn_0.grid(row =5, column=1, columnspan=2   , padx=5, pady=5)
+btn_0.grid(row =5, column=1, padx=5, pady=5)
 btn_decimal = tk.Button(root, text =".", command=lambda: add_to_calculation("."), **number_style)
 btn_decimal.grid(row =5, column=3)
 # Parentheses
@@ -95,6 +116,12 @@ btn_multiply = tk.Button(root, text ="*", command=lambda: add_to_calculation("*"
 btn_multiply.grid(row =2, column=4)
 btn_equals = tk.Button(root, text ="=", command=evaluation_calculation,  **equal_style)
 btn_equals.grid(row =5, column=4)
+btn_sin = tk.Button(root, text ="sin", command=lambda: apply_trigonometry("sin"), **operator_style)
+btn_sin.grid(row =5, column=5)
+btn_cos = tk.Button(root, text ="cos", command=lambda: apply_trigonometry("cos"), **operator_style)
+btn_cos.grid(row =4, column=5)
+btn_tan = tk.Button(root, text ="tan", command=lambda: apply_trigonometry("tan"), **operator_style)
+btn_tan.grid(row =3, column=5)
 
 # Special
 btn_clear = tk.Button(root, text ="C", command=clear_filed, **number_style)
